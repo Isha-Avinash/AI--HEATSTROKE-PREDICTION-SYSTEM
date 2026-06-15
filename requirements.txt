@@ -1,0 +1,10 @@
+streamlit
+pandas
+scikit-learn
+plotly
+requests
+joblib
+numpy<2
+sentence-transformers
+transformers<4.40.0
+torch
