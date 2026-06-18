@@ -1,9 +1,11 @@
 import joblib
 import os
 import pandas as pd
-from model_trainer import train_and_save_model, calculate_heat_index
+from core.explainability import build_prediction_explanation
+from services.training_service import train_and_save_model, calculate_heat_index
 
-MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "heatstroke_model.joblib")
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(PROJECT_ROOT, "artifacts", "models", "heatstroke_model.joblib")
 
 def get_model():
     """Loads the model, auto-training it if it doesn't exist."""
@@ -55,6 +57,29 @@ def predict_risk_ml(age, body_temp, water_intake, dizziness, headache, heart_rat
         "heat_index": heat_index,
         "probabilities": {risk_labels[i]: round(prob[i] * 100, 1) for i in range(len(prob))}
     }
+
+def explain_prediction_ml(age, body_temp, water_intake, dizziness, headache, heart_rate, outdoor_temp, humidity, muscle_cramps, nausea, confusion):
+    """
+    Builds a lightweight local explanation for the current prediction input.
+    """
+    model_data = get_model()
+    importances = model_data.get("feature_importances", {})
+    heat_index = calculate_heat_index(outdoor_temp, humidity)
+    return build_prediction_explanation(
+        importances=importances,
+        age=age,
+        body_temp=body_temp,
+        water_intake=water_intake,
+        dizziness=dizziness,
+        headache=headache,
+        heart_rate=heart_rate,
+        outdoor_temp=outdoor_temp,
+        humidity=humidity,
+        heat_index=heat_index,
+        muscle_cramps=muscle_cramps,
+        nausea=nausea,
+        confusion=confusion,
+    )
 
 def get_feature_importances():
     """Returns the model's feature importances dict."""

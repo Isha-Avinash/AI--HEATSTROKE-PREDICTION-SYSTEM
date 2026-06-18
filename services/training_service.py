@@ -158,9 +158,14 @@ def generate_synthetic_data(num_samples=5000, seed=42):
 def train_and_save_model():
     print("Generating synthetic clinical dataset (5000 samples)...")
     df = generate_synthetic_data(5000)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    artifact_data_dir = os.path.join(current_dir, "artifacts", "data")
+    artifact_model_dir = os.path.join(current_dir, "artifacts", "models")
+    os.makedirs(artifact_data_dir, exist_ok=True)
+    os.makedirs(artifact_model_dir, exist_ok=True)
     
     # Save the generated dataset for local reference
-    df.to_csv("synthetic_heatstroke_dataset.csv", index=False)
+    df.to_csv(os.path.join(artifact_data_dir, "synthetic_heatstroke_dataset.csv"), index=False)
     
     # Features and target
     features = [
@@ -252,8 +257,7 @@ def train_and_save_model():
     }
     
     # Ensure save directory is local path of training script
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    model_save_path = os.path.join(current_dir, "heatstroke_model.joblib")
+    model_save_path = os.path.join(artifact_model_dir, "heatstroke_model.joblib")
     joblib.dump(model_data, model_save_path)
     print(f"Model successfully saved to '{model_save_path}'")
 

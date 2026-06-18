@@ -1,2 +1,13 @@
 venv/
 __pycache__/
+*.pyc
+*.pyo
+*.db
+*.db-*
+.DS_Store
+.env
+.streamlit/secrets.toml
+.pytest_cache/
+.mypy_cache/
+logs/
+runtime/

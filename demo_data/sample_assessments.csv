@@ -1,0 +1,13 @@
+patient_name,age,body_temp,water_intake,dizziness,headache,heart_rate,outdoor_temp,humidity,heat_index,calculated_bmi,predicted_risk,confidence,muscle_cramps,nausea,confusion
+Worker-Delhi-01,42,40.6,0.8,1,1,132,44.0,32.0,46.4,24.8,HIGH,96.2,1,1,1
+Worker-Delhi-02,57,39.8,1.1,1,1,126,42.5,38.0,45.2,27.3,HIGH,93.4,1,1,0
+Athlete-Camp-03,19,39.2,1.3,1,0,122,37.0,70.0,51.7,22.1,HIGH,88.9,1,1,0
+Factory-Bay-04,36,38.6,1.4,1,1,112,35.0,72.0,45.5,29.0,MEDIUM,82.6,1,0,0
+Event-Staff-05,28,38.1,1.7,0,1,104,34.0,65.0,41.2,23.6,MEDIUM,76.8,0,1,0
+Traffic-Team-06,49,37.9,1.5,1,0,108,36.5,52.0,42.6,26.4,MEDIUM,74.3,0,0,0
+Security-Post-07,64,38.4,2.0,0,1,98,33.0,80.0,45.1,28.2,MEDIUM,69.7,0,0,0
+School-Sports-08,15,37.6,1.8,1,0,115,32.0,58.0,36.5,20.5,MEDIUM,66.1,1,0,0
+Office-Commute-09,31,37.0,2.7,0,0,78,31.0,50.0,33.1,22.7,LOW,94.0,0,0,0
+Warehouse-10,45,37.3,2.4,0,0,86,30.0,45.0,31.1,25.2,LOW,90.5,0,0,0
+Park-Visitor-11,68,37.4,2.2,0,0,92,29.0,60.0,31.4,24.5,LOW,85.9,0,0,0
+Runner-12,24,37.8,2.8,0,0,96,28.0,55.0,29.8,21.9,LOW,87.2,0,0,0

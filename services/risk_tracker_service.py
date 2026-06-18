@@ -1,21 +1,34 @@
 import sqlite3
-import os
-import pandas as pd
-from database import DB_PATH
+import storage.database as database
 
-def get_patient_timeline(patient_name):
+def get_patient_timeline(patient_name, age=None, height_m=None):
     """
     Retrieves chronological diagnostic history for a specific patient.
     """
-    if not patient_name or patient_name.strip() == "" or patient_name == "Anonymous":
+    normalized_name = (patient_name or "").strip()
+    if normalized_name == "" or normalized_name.casefold() == "anonymous":
         return []
         
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(database.DB_PATH)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
+    conditions = ["lower(trim(patient_name)) = lower(trim(?))"]
+    params = [normalized_name]
+    if age is not None:
+        conditions.append("age = ?")
+        params.append(int(age))
+    if height_m is not None:
+        conditions.append("(height_m IS NULL OR abs(height_m - ?) <= 0.01)")
+        params.append(float(height_m))
+
     cursor.execute(
-        "SELECT * FROM heatstroke_records WHERE patient_name = ? ORDER BY timestamp ASC",
-        (patient_name.strip(),)
+        f"""
+        SELECT *
+        FROM heatstroke_records
+        WHERE {' AND '.join(conditions)}
+        ORDER BY timestamp ASC
+        """,
+        params
     )
     rows = cursor.fetchall()
     conn.close()
