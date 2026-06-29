@@ -1,21 +1,36 @@
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
+def predict_risk(
+    temp,
+    water,
+    dizziness,
+    headache,
+    bmi
+):
 
-data = pd.DataFrame({
-    "Temperature": [45, 40, 38, 42, 36, 41],
-    "Water": [1, 2, 3, 1, 4, 2],
-    "Dizziness": [1, 1, 0, 1, 0, 1],
-    "Headache": [1, 0, 0, 1, 0, 1],
-    "Risk": [1, 1, 0, 1, 0, 0]
-})
+    score = 0
 
-X = data[["Temperature", "Water", "Dizziness", "Headache"]]
-y = data["Risk"]
+    if temp >= 42:
+        score += 3
 
-model = RandomForestClassifier()
-model.fit(X, y)
+    elif temp >= 38:
+        score += 2
 
-def predict_risk(temp, water, dizziness, headache):
-    pred = model.predict([[temp, water, dizziness, headache]])
+    if water < 2:
+        score += 2
 
-    return "HIGH" if pred[0] == 1 else "LOW"
+    if dizziness == 1:
+        score += 1
+
+    if headache == 1:
+        score += 1
+
+    if bmi >= 30:
+        score += 1
+
+    if score >= 6:
+        return "HIGH"
+
+    elif score >= 3:
+        return "MEDIUM"
+
+    else:
+        return "LOW"
