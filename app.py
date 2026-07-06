@@ -1,4 +1,96 @@
 import streamlit as st
+
+# ---------- PREMIUM UI ----------
+st.set_page_config(
+    page_title="Heatstroke AI Dashboard",
+    page_icon="🩺",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+st.markdown("""
+<style>
+
+/* Main App */
+.stApp{
+    background: linear-gradient(135deg,#0F172A,#1E293B);
+    color:white;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"]{
+    background: linear-gradient(180deg,#111827,#1E3A8A);
+    width:210px !important;
+}
+
+[data-testid="stSidebar"] *{
+    color:white;
+}
+
+/* Sidebar Navigation */
+section[data-testid="stSidebar"] button{
+    border-radius:12px;
+    margin-bottom:6px;
+}
+
+/* Cards */
+.card{
+    background:rgba(255,255,255,0.08);
+    padding:18px;
+    border-radius:18px;
+    backdrop-filter: blur(12px);
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+/* Buttons */
+.stButton>button{
+    background:linear-gradient(90deg,#2563EB,#06B6D4);
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    padding:10px 18px;
+    transition:.3s;
+}
+
+.stButton>button:hover{
+    transform:scale(1.04);
+    box-shadow:0 8px 20px rgba(37,99,235,.4);
+}
+
+/* Input Boxes */
+.stTextInput input,
+.stNumberInput input{
+    border-radius:12px !important;
+}
+
+/* Selectbox */
+.stSelectbox div{
+    border-radius:12px;
+}
+
+/* Metric Cards */
+[data-testid="metric-container"]{
+    background:#1E293B;
+    border-radius:18px;
+    padding:18px;
+    border:1px solid #334155;
+    box-shadow:0 8px 18px rgba(0,0,0,.2);
+}
+
+/* Headers */
+h1,h2,h3{
+    color:#38BDF8;
+}
+
+/* Horizontal Rule */
+hr{
+    border:1px solid #334155;
+}
+
+</style>
+""", unsafe_allow_html=True)
 import pandas as pd
 
 from model import predict_risk
